@@ -32,14 +32,11 @@ document.body.addEventListener("keydown", function () {
 //   }
 // });
 
-console.log(document.querySelectorAll("div[type=button]"));
-document.querySelectorAll("div[type=button]").forEach(() => {
-  this.addEventListener("click", function (event) {
+document.querySelectorAll("div[type=button]").forEach((button) => {
+  button.addEventListener("click", function (event) {
     if (gameStarted) {
       // const userChosenColour = $(this).attr("id");
-      console.log(event.target);
       const userChosenColour = event.target.getAttribute("id");
-      console.log(userChosenColour);
 
       userClickedPattern.push(userChosenColour);
       playSound(userChosenColour);
@@ -62,7 +59,6 @@ function nextSequence() {
 
   // let targetButton = $("#" + randomChosenColor);
   let targetButton = document.getElementById(randomChosenColor);
-  console.log("animating sequence :: " + targetButton);
 
   playSound(randomChosenColor);
   // targetButton.fadeOut(100).fadeIn(100);
@@ -105,12 +101,16 @@ function checkAnswer(level) {
       document.body.classList.remove("game-over");
     }, 500);
 
-    $("#level-title").text(
-      "Game Over, score: " +
-        (gamePattern.length - 1) +
-        ". Press any key to start again."
-    );
+    // $("#level-title").text(
+    //   "Game Over, score: " +
+    //     (gamePattern.length - 1) +
+    //     ". Press any key to start again."
+    // );
 
+    document.getElementById("level-title").innerHTML =
+      "Game Over, score: " +
+      (gamePattern.length - 1) +
+      ". Press any key to start again.";
     startOver();
   }
 }
